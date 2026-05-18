@@ -1,5 +1,6 @@
 'use client';
 
+// Trigger commit to force Vercel to redeploy the cinematic landing page
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
