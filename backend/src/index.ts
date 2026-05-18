@@ -74,7 +74,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/notes', notesRoutes);
 app.use('/api/users', usersRoutes);
 
-// Health check
+// Health checks
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', service: 'Cowrite API', timestamp: new Date().toISOString() });
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
