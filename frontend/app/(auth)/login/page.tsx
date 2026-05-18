@@ -118,13 +118,13 @@ export default function LoginPage() {
       >
         {/* Heading */}
         <h2
-          className="mb-1.5"
           style={{
             fontFamily: 'var(--font-display)',
             fontSize: '32px',
             fontWeight: 400,
             fontStyle: 'italic',
             color: 'var(--color-text-heading)',
+            marginBottom: '8px',
           }}
         >
           Welcome back
@@ -132,11 +132,11 @@ export default function LoginPage() {
 
         {/* Subtext */}
         <p
-          className="mb-8"
           style={{
             fontFamily: 'var(--font-sans)',
             fontSize: '15px',
             color: 'var(--color-text-secondary)',
+            marginBottom: '32px',
           }}
         >
           Sign in to your workspace
@@ -152,11 +152,11 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            containerClassName="mb-5"
+            containerStyle={{ marginBottom: '24px' }}
           />
 
           {/* Password input field */}
-          <div className="flex flex-col mb-8">
+          <div className="flex flex-col" style={{ marginBottom: '32px' }}>
             <label className="block font-sans text-[11px] font-semibold tracking-[0.08em] text-[var(--color-text-secondary)] uppercase mb-2 select-none">
               Password
             </label>

@@ -3,12 +3,13 @@ import React from 'react';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   containerClassName?: string;
+  containerStyle?: React.CSSProperties;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, containerClassName = '', className = '', ...props }, ref) => {
+  ({ label, containerClassName = '', containerStyle, className = '', ...props }, ref) => {
     return (
-      <div className={`flex flex-col w-full ${containerClassName}`}>
+      <div className={`flex flex-col w-full ${containerClassName}`} style={containerStyle}>
         {label && (
           <label className="block font-sans text-[11px] font-semibold tracking-[0.08em] text-[var(--color-text-secondary)] uppercase mb-1.5 select-none">
             {label}

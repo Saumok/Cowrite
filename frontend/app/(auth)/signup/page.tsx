@@ -129,13 +129,13 @@ export default function SignupPage() {
       >
         {/* Heading */}
         <h2 
-          className="mb-1.5"
           style={{
             fontFamily: 'var(--font-display)',
             fontSize: '32px',
             fontWeight: 400,
             fontStyle: 'italic',
             color: 'var(--color-text-heading)',
+            marginBottom: '8px',
           }}
         >
           Create Account
@@ -143,11 +143,11 @@ export default function SignupPage() {
 
         {/* Subtext */}
         <p 
-          className="mb-12"
           style={{
             fontFamily: 'var(--font-sans)',
             fontSize: '15px',
             color: 'var(--color-text-secondary)',
+            marginBottom: '32px',
           }}
         >
           Start your creative journey
@@ -163,7 +163,7 @@ export default function SignupPage() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            containerClassName="mb-8"
+            containerStyle={{ marginBottom: '24px' }}
           />
 
           {/* Email input field */}
@@ -174,11 +174,11 @@ export default function SignupPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            containerClassName="mb-8"
+            containerStyle={{ marginBottom: '24px' }}
           />
 
           {/* Password input field */}
-          <div className="flex flex-col mb-4">
+          <div className="flex flex-col" style={{ marginBottom: '16px' }}>
             <label className="block font-sans text-[11px] font-semibold tracking-[0.08em] text-[var(--color-text-secondary)] uppercase mb-2 select-none">
               Password
             </label>
