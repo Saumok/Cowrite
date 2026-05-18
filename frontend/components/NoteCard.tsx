@@ -142,7 +142,7 @@ export function NoteCard({
           zIndex: 3,
         }}
       >
-        {/* Title with gradient shimmer */}
+        {/* Title */}
         <h3
           style={{
             fontFamily: 'var(--font-display)',
@@ -153,13 +153,8 @@ export function NoteCard({
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            background: hovered
-              ? `linear-gradient(135deg, ${accent.strip} 0%, #5C3A2E 100%)`
-              : 'linear-gradient(135deg, var(--color-text-heading), rgba(74,63,56,0.75))',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            transition: 'all 280ms ease',
+            color: hovered ? accent.strip : 'var(--color-text-heading)',
+            transition: 'color 280ms ease',
           }}
         >
           {title || 'Untitled Note'}
