@@ -330,7 +330,7 @@ export default function CinematicLandingPage() {
               Blending ink, paper,{' '}
               <em className="not-italic" style={{ color: '#F4A96A' }}>and liquid glass.</em>
             </h2>
-            <p className="max-w-2xl mx-auto text-[15px] leading-relaxed mt-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <p className="max-w-xl mx-auto text-[15px] leading-relaxed mt-6" style={{ color: 'rgba(255,255,255,0.55)', textAlign: 'center' }}>
               We believe digital interfaces shouldn't be cold and industrial. Cowrite captures the warm tactile weight of leather-bound notebooks, typewriter spools, and cotton fibers — merged into a high-performance, real-time collaboration canvas.
             </p>
           </div>
@@ -370,24 +370,24 @@ export default function CinematicLandingPage() {
                 key={i}
                 className="group relative p-7 rounded-3xl cursor-default"
                 style={{
-                  background: 'rgba(255,255,255,0.04)',
+                  background: 'rgba(255,255,255,0.07)',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)',
                   transition: 'all 300ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-                  e.currentTarget.style.borderColor = 'rgba(196,120,90,0.25)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.11)';
+                  e.currentTarget.style.borderColor = 'rgba(196,120,90,0.35)';
                   e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12)';
+                  e.currentTarget.style.boxShadow = '0 20px 56px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.08)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)';
                 }}
               >
                 {/* Glass shimmer top line */}
@@ -449,44 +449,43 @@ export default function CinematicLandingPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="relative p-8 rounded-3xl flex flex-col justify-between group"
+                className="relative pl-10 pr-8 py-8 rounded-3xl flex flex-col group"
                 style={{
-                  background: 'rgba(255,255,255,0.04)',
+                  background: 'rgba(255,255,255,0.07)',
                   backdropFilter: 'blur(24px)',
                   WebkitBackdropFilter: 'blur(24px)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: '0 8px 40px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  boxShadow: '0 8px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)',
                   transition: 'all 320ms ease',
-                  minHeight: '220px',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                  e.currentTarget.style.borderColor = `${item.accent}33`;
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
+                  e.currentTarget.style.borderColor = `${item.accent}44`;
                   e.currentTarget.style.transform = 'translateY(-3px)';
+                  e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px ${item.accent}22, inset 0 1px 0 rgba(255,255,255,0.15)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                   e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)';
                 }}
               >
-                {/* Top shimmer */}
-                <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px', background: 'rgba(255,255,255,0.12)', borderRadius: '999px' }} />
                 {/* Accent left strip */}
-                <div style={{ position: 'absolute', top: '24px', bottom: '24px', left: 0, width: '3px', background: item.accent, borderRadius: '0 3px 3px 0', opacity: 0.7 }} />
+                <div style={{ position: 'absolute', top: '24px', bottom: '24px', left: 0, width: '3px', background: item.accent, borderRadius: '0 3px 3px 0', opacity: 0.75 }} />
 
-                {/* Large open-quote glyph */}
-                <div className="mb-4 select-none" style={{ fontSize: '56px', lineHeight: 1, color: item.accent, opacity: 0.25, fontFamily: "'Instrument Serif', serif" }}>
-                  "
+                {/* Compact inline open-quote */}
+                <div className="mb-3 select-none" style={{ color: item.accent, opacity: 0.55, fontSize: '28px', lineHeight: 1, fontFamily: "'Instrument Serif', serif", fontWeight: 700 }}>
+                  “
                 </div>
 
-                <p className="text-[16px] leading-[1.75] select-none" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.85)', fontStyle: 'italic' }}>
-                  {item.quote}
+                <p className="text-[15.5px] leading-[1.8] select-none flex-1" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.88)', fontStyle: 'italic' }}>
+                  {item.quote.replace(/^"|"$/g, '')}
                 </p>
 
-                <div className="flex items-center gap-2.5 mt-7 select-none">
+                <div className="flex items-center gap-2.5 mt-6 select-none">
                   <span className="w-5 h-[1px]" style={{ background: item.accent, opacity: 0.6 }} />
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: 'rgba(255,255,255,0.40)' }}>
                     {item.meta} · {item.author}
                   </span>
                 </div>
@@ -524,11 +523,11 @@ export default function CinematicLandingPage() {
           <div
             className="relative rounded-3xl overflow-hidden"
             style={{
-              background: 'rgba(255,255,255,0.04)',
+              background: 'rgba(255,255,255,0.06)',
               backdropFilter: 'blur(32px)',
               WebkitBackdropFilter: 'blur(32px)',
-              border: '1px solid rgba(255,255,255,0.10)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)',
+              border: '1px solid rgba(255,255,255,0.18)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.18)',
               padding: '40px 36px',
             }}
           >
