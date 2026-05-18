@@ -1,335 +1,220 @@
-# Real-Time Collaborative Notes Platform
+# Cowrite
+### Real-Time Collaborative Notes Platform
 
-> **Live Demo:** (Deploy to get URL)
+![Live Demo](https://img.shields.io/badge/Live_Demo-cowrite--chi.vercel.app-C4785A?style=for-the-badge&logo=vercel) ![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js) ![Socket.IO](https://img.shields.io/badge/Socket.IO-4.x-010101?style=for-the-badge&logo=socket.io) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-3ECF8E?style=for-the-badge&logo=supabase) ![Assignment](https://img.shields.io/badge/LHCPL--SE--2026--3429-Fresher_Assignment-blue?style=for-the-badge)
 
-A full-stack collaborative note-taking application built for Lavish Health Care Private Limited. Multiple users can edit the same note simultaneously with changes syncing in real-time via Socket.IO.
+> A full-stack web application where multiple users can create, share, and edit notes together — with changes appearing instantly for all collaborators without refreshing the page.
+
+**[🚀 View Live Demo →](https://cowrite-chi.vercel.app)**
+
+## 🔑 Demo Accounts for Evaluators
+
+Use these pre-configured accounts to test every feature instantly:
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Owner (Alex)** | alex.cowrite.test@gmail.com | Cowrite@Test1 |
+| **Collaborator (Jordan)** | jordan.cowrite.test@gmail.com | Cowrite@Test2 |
+
+These accounts already have shared notes set up and ready to demonstrate real-time collaboration.
+
+## ⚡ Testing Real-Time Collaboration (2 minutes)
+
+1. Open https://cowrite-chi.vercel.app in Chrome
+2. Login as Alex (Account A credentials above)
+3. Open an Incognito window → same URL
+4. Login as Jordan (Account B credentials)
+5. Alex: click "Shared Workspace" note
+6. Jordan: open the same "Shared Workspace" note
+7. Type anything in Alex's window
+8. Watch it appear in Jordan's window LIVE ✨ (no refresh needed)
+9. Try the reverse — Jordan types, Alex sees it
+10. Open "Meeting Notes" as Jordan → notice it's read-only (Viewer permission)
+
+This demonstrates: Auth ✓ Real-time sync ✓ Permissions ✓ Sharing ✓
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   CLIENT (Browser)                      │
-└────────────────────────┬────────────────────────────────┘
-                         │  HTTPS + WSS
-           ┌─────────────┴──────────────┐
-           │                            │
-           ▼                            ▼
-┌─────────────────┐           ┌──────────────────────┐
-│  VERCEL         │           │  RENDER               │
-│  Next.js 14     │  REST API  │  Node.js / Express   │
-│  (Serverless)   │ ◄────────► │  + Socket.IO         │
-│                 │           │  (Persistent Process) │
-└─────────────────┘           └──────────┬───────────┘
-                                         │
-                                         ▼
-                              ┌──────────────────────┐
-                              │  SUPABASE / RENDER   │
-                              │  PostgreSQL Database │
-                              └──────────────────────┘
+┌─────────────────────────────────────────────────┐
+│                   BROWSER                        │
+│         Next.js 14 (React + TypeScript)         │
+└──────────────┬──────────────┬───────────────────┘
+               │ REST API     │ WebSocket (WSS)
+               ▼              ▼
+┌─────────────────────────────────────────────────┐
+│              RENDER (Persistent Server)          │
+│         Node.js + Express.js + Socket.IO         │
+│                                                  │
+│  REST: Auth, CRUD, Sharing                       │
+│  WS:   Rooms, send-changes, receive-changes      │
+└──────────────────────┬──────────────────────────┘
+                       │ Prisma ORM
+                       ▼
+┌─────────────────────────────────────────────────┐
+│           SUPABASE (PostgreSQL)                  │
+│     Users │ Notes │ NoteShares (Viewer/Editor)  │
+└─────────────────────────────────────────────────┘
 ```
 
-**Split deployment architecture:** Vercel handles the Next.js frontend (serverless), while Render runs a persistent Node.js process for Socket.IO WebSocket connections. This is necessary because serverless functions cannot maintain long-lived WebSocket connections.
+Vercel uses serverless functions that terminate after each request. WebSocket connections require a persistent, long-lived TCP connection that serverless functions cannot maintain. Therefore the Express + Socket.IO backend is deployed on Render as a persistent Web Service, while the Next.js frontend lives on Vercel. This split deployment is intentional and production-correct.
 
-## 🚀 Tech Stack
+## ✨ Features
 
-### Frontend
-- **Next.js 14** (App Router) - React framework with SSR
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling with dark mode
-- **Socket.IO Client** - Real-time WebSocket communication
-- **Axios** - HTTP client for REST API
-- **React Hot Toast** - Toast notifications
+| Feature | Details |
+|---------|---------|
+| 🔐 Authentication | JWT-based signup/login/logout |
+| 📝 Notes CRUD | Create, edit, delete, search notes |
+| ⚡ Real-Time Sync | Socket.IO rooms, sub-200ms latency |
+| 👥 Sharing | Share by email with role assignment |
+| 🔒 Permissions | Editor (read-write) / Viewer (read-only) |
+| 🎨 Rich UI | Warm glassmorphism, DM Serif Display font |
+| 🖊️ Doodle Pad | Freehand sketches embedded in notes |
+| 💾 Auto-save | Debounced save every 1.5s |
+| 📱 Responsive | Works on mobile, tablet, desktop |
+| 🌐 Live Deploy | Vercel + Render + Supabase |
 
-### Backend
-- **Node.js** - Runtime
-- **Express.js** - REST API framework
-- **Socket.IO** - WebSocket server for real-time collaboration
-- **Prisma ORM** - Type-safe database client
-- **PostgreSQL** - Relational database
-- **JWT** - Authentication
-- **bcrypt** - Password hashing
+## 🛠️ Tech Stack
 
-## ✨ Key Features
+| Layer | Technology |
+|-------|-----------|
+| Frontend Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Real-Time | Socket.IO Client 4.x |
+| HTTP Client | Axios |
+| Backend Runtime | Node.js 18+ |
+| Backend Framework | Express.js 4.x |
+| WebSocket Server | Socket.IO 4.x |
+| Database | PostgreSQL (Supabase) |
+| ORM | Prisma 5.x |
+| Auth | JWT (jsonwebtoken + bcryptjs) |
+| Frontend Deploy | Vercel |
+| Backend Deploy | Render |
+| DB Hosting | Supabase |
 
-- ✅ **JWT Authentication** - Secure signup/login with token-based auth
-- ✅ **Real-Time Collaboration** - Multiple users can edit notes simultaneously
-- ✅ **Live Presence** - See who's currently viewing/editing a note
-- ✅ **Typing Indicators** - Know when collaborators are typing
-- ✅ **Granular Permissions** - Share notes as Viewer (read-only) or Editor (read-write)
-- ✅ **Auto-Save** - Debounced automatic saving every 2 seconds
-- ✅ **Socket Reconnection** - Automatic reconnection with exponential backoff
-- ✅ **Dark Mode UI** - Beautiful dark theme with electric blue accents
-- ✅ **Optimistic UI** - Instant local updates before server confirmation
+## 🚀 Running Locally
 
-## 📋 Prerequisites
+### Prerequisites
+- Node.js 18+
+- PostgreSQL (local) or Supabase account
+- Git
 
-- **Node.js** 18+ 
-- **PostgreSQL** (local installation or Supabase account)
-- **npm** or **yarn**
-
-## 🛠️ Local Development Setup
-
-### 1. Clone the Repository
-
+### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/collaborative-notes.git
-cd collaborative-notes
+git clone https://github.com/<your-username>/cowrite.git
+cd cowrite
 ```
 
-### 2. Backend Setup
-
+### 2. Backend setup
 ```bash
 cd backend
-
-# Install dependencies
-npm install
-
-# Copy environment variables
 cp .env.example .env
-
-# Edit .env and set your values:
-# - DATABASE_URL: Your PostgreSQL connection string
-# - JWT_SECRET: Generate with: node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
-# - FRONTEND_URL: http://localhost:3000
-# - PORT: 5000
-
-# Run database migrations
-npx prisma migrate dev --name init
-
-# Generate Prisma Client
-npx prisma generate
-
-# Start the backend server
-npm run dev
 ```
 
-Backend will run on `http://localhost:5000`
-
-### 3. Frontend Setup
-
-Open a new terminal:
+Edit `.env`:
+```env
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_jwt_secret_min_32_chars
+FRONTEND_URL=http://localhost:3000
+PORT=5000
+```
 
 ```bash
-cd frontend
-
-# Install dependencies
 npm install
-
-# Copy environment variables
-cp .env.local.example .env.local
-
-# Edit .env.local:
-# NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
-
-# Start the development server
+npx prisma migrate dev
+npx prisma generate
 npm run dev
 ```
 
-Frontend will run on `http://localhost:3000`
-
-### 4. Test the Application
-
-1. Open `http://localhost:3000` in your browser
-2. Sign up for a new account
-3. Create a note
-4. Open the same note in an incognito window with a different account
-5. Type in one window and watch it appear in the other in real-time!
-
-## 🗄️ Database Schema
-
-```prisma
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  notes     Note[]
-  sharedNotes NoteShare[]
-}
-
-model Note {
-  id        String   @id @default(cuid())
-  title     String   @default("Untitled Note")
-  content   String   @default("")
-  ownerId   String
-  owner     User     @relation(fields: [ownerId], references: [id])
-  shares    NoteShare[]
-}
-
-model NoteShare {
-  id        String   @id @default(cuid())
-  role      Role     @default(VIEWER)
-  noteId    String
-  note      Note     @relation(fields: [noteId], references: [id])
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  
-  @@unique([noteId, userId])
-}
-
-enum Role {
-  VIEWER
-  EDITOR
-}
+### 3. Frontend setup
+```bash
+cd ../frontend
+cp .env.local.example .env.local
 ```
 
-## 🚢 Production Deployment
+Edit `.env.local`:
+```env
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
+```
 
-### Database (Supabase)
+```bash
+npm install
+npm run dev
+```
 
-1. Create a project at [supabase.com](https://supabase.com)
-2. Go to **Settings → Database → Connection String**
-3. Copy the connection string (Transaction mode)
-4. Use this as `DATABASE_URL` in Render
-
-### Backend (Render)
-
-1. Create a new **Web Service** on [render.com](https://render.com)
-2. Connect your GitHub repository
-3. Set **Root Directory:** `backend`
-4. Set **Build Command:** `npm install && npx prisma generate && npx prisma migrate deploy && npm run build`
-5. Set **Start Command:** `npm start`
-6. Add environment variables:
-   - `DATABASE_URL` - From Supabase
-   - `JWT_SECRET` - Generate a secure random string
-   - `FRONTEND_URL` - Your Vercel URL (update after deploying frontend)
-   - `NODE_ENV` - `production`
-   - `PORT` - `5000`
-7. Deploy and note the Render URL
-
-### Frontend (Vercel)
-
-1. Create a new project on [vercel.com](https://vercel.com)
-2. Import your GitHub repository
-3. Set **Root Directory:** `frontend`
-4. Add environment variable:
-   - `NEXT_PUBLIC_BACKEND_URL` - Your Render backend URL
-5. Deploy and note the Vercel URL
-
-### Update CORS
-
-Go back to Render → Environment Variables → Update `FRONTEND_URL` to your Vercel URL. Render will auto-redeploy.
+### 4. Open the app
+Visit http://localhost:3000
 
 ## 📁 Project Structure
 
 ```
-collaborative-notes/
-├── backend/
-│   ├── src/
-│   │   ├── routes/
-│   │   │   ├── auth.ts          # Authentication endpoints
-│   │   │   ├── notes.ts         # Note CRUD + sharing
-│   │   │   └── users.ts         # User search
-│   │   ├── socket/
-│   │   │   └── noteHandlers.ts  # Socket.IO event handlers
-│   │   ├── middleware/
-│   │   │   └── auth.ts          # JWT verification
-│   │   ├── prisma/
-│   │   │   └── client.ts        # Prisma singleton
-│   │   └── index.ts             # Express + Socket.IO server
-│   ├── prisma/
-│   │   └── schema.prisma        # Database schema
-│   └── package.json
-├── frontend/
+cowrite/
+├── frontend/                 # Next.js app (Vercel)
 │   ├── app/
 │   │   ├── (auth)/
-│   │   │   ├── login/           # Login page
-│   │   │   └── signup/          # Signup page
-│   │   ├── dashboard/           # Notes dashboard
-│   │   ├── notes/[noteId]/      # Note editor
-│   │   └── layout.tsx
+│   │   │   ├── login/
+│   │   │   └── signup/
+│   │   ├── dashboard/
+│   │   └── notes/[noteId]/
 │   ├── components/
-│   │   ├── ui/                  # Reusable UI components
+│   │   ├── ui/               # Button, Input primitives
 │   │   ├── NoteCard.tsx
 │   │   ├── ShareModal.tsx
-│   │   ├── CollaboratorIndicator.tsx
-│   │   └── SocketStatusBadge.tsx
-│   ├── hooks/
-│   │   └── useAuth.ts           # Authentication hook
-│   ├── lib/
-│   │   ├── api.ts               # Axios instance
-│   │   ├── socket.ts            # Socket.IO client
-│   │   └── utils.ts             # Helper functions
-│   └── types/
-│       └── index.ts             # TypeScript types
-└── docs/                        # Project documentation
+│   │   └── Navbar.tsx
+│   └── lib/
+│       ├── socket.ts         # Socket.IO client
+│       └── api.ts            # Axios instance
+├── backend/                  # Express app (Render)
+│   ├── src/
+│   │   ├── routes/
+│   │   │   ├── auth.ts
+│   │   │   ├── notes.ts
+│   │   │   └── users.ts
+│   │   ├── socket/
+│   │   │   └── noteHandlers.ts
+│   │   ├── middleware/
+│   │   │   └── auth.ts
+│   │   └── index.ts
+│   └── prisma/
+│       └── schema.prisma
+└── docs/                     # Architecture documentation
+    ├── PRD.md
+    ├── APP_FLOW.md
+    ├── TECH_STACK.md
+    ├── FRONTEND_GUIDELINES.md
+    ├── BACKEND_STRUCTURE.md
+    └── IMPLEMENTATION_PLAN.md
 ```
 
-## 🔒 Security Features
+## 🔌 API Endpoints
 
-- **Password Hashing:** bcrypt with 12 salt rounds
-- **JWT Authentication:** 7-day token expiry
-- **CORS Protection:** Whitelist-based origin validation
-- **Rate Limiting:** 100 requests per 15 minutes on auth routes
-- **Helmet.js:** Secure HTTP headers
-- **SQL Injection Prevention:** Prisma's parameterized queries
-- **Socket Authentication:** JWT verification on WebSocket connections
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | /api/auth/signup | Public | Register user |
+| POST | /api/auth/login | Public | Login user |
+| GET | /api/notes | Required | Get own notes |
+| POST | /api/notes | Required | Create note |
+| PATCH | /api/notes/:id | Required | Update note |
+| DELETE | /api/notes/:id | Required | Delete note |
+| POST | /api/notes/:id/share | Required | Share note |
+| GET | /api/notes/shared | Required | Get shared notes |
 
-## 🎨 Design System
+## ⚡ Socket Events
 
-- **Dark Mode:** Deep slate backgrounds with electric blue accents
-- **Typography:** Inter for UI, JetBrains Mono for code
-- **Colors:**
-  - Background: `#0f1117` → `#1a1d27` → `#242736`
-  - Accent: `#3b82f6` (Electric Blue)
-  - Success: `#22c55e`
-  - Warning: `#f59e0b`
-  - Error: `#ef4444`
+| Event | Direction | Description |
+|-------|-----------|-------------|
+| join-note | Client → Server | Join note room |
+| leave-note | Client → Server | Leave note room |
+| send-changes | Client → Server | Broadcast content |
+| receive-changes | Server → Client | Receive updates |
 
-## 📝 API Endpoints
+## 👨‍💻 About
 
-### Authentication
-- `POST /api/auth/signup` - Register new user
-- `POST /api/auth/login` - Authenticate user
+Built by **Saumok Kundu** as a fresher full-stack assignment for **Lavish Health Care Private Limited**
 
-### Notes
-- `GET /api/notes` - Get user's notes
-- `GET /api/notes/shared` - Get notes shared with user
-- `POST /api/notes` - Create new note
-- `GET /api/notes/:id` - Get single note
-- `PATCH /api/notes/:id` - Update note
-- `DELETE /api/notes/:id` - Delete note (owner only)
-
-### Sharing
-- `POST /api/notes/:id/share` - Share note with user
-- `DELETE /api/notes/:id/share/:userId` - Revoke access
-- `GET /api/notes/:id/shares` - List collaborators
-
-### Socket Events
-- `join-note` - Join note collaboration room
-- `leave-note` - Leave note room
-- `send-changes` - Broadcast content changes
-- `receive-changes` - Receive remote changes
-- `typing-start` / `typing-stop` - Typing indicators
-- `room-users` - Active collaborators list
-
-## 🐛 Troubleshooting
-
-### Backend won't start
-- Check PostgreSQL is running
-- Verify `DATABASE_URL` in `.env`
-- Run `npx prisma generate` and `npx prisma migrate dev`
-
-### Frontend can't connect to backend
-- Verify backend is running on port 5000
-- Check `NEXT_PUBLIC_BACKEND_URL` in `.env.local`
-- Check browser console for CORS errors
-
-### Socket connection fails
-- Ensure JWT token is valid (check localStorage)
-- Verify `FRONTEND_URL` in backend `.env` matches your frontend URL
-- Check browser network tab for WebSocket connection
-
-## 📄 License
-
-This project was created as an assignment for Lavish Health Care Private Limited.
-
-## 👤 Author
-
-**Saumok Kundu**  
-Project ID: LHCPL-SE-2026-3429  
-Date: May 17, 2026
+Project ID: `LHCPL-SE-2026-3429`
 
 ---
 
-Built with ❤️ using Next.js, Express, Socket.IO, and PostgreSQL
+*Built with ❤️ and lots of ☕*
