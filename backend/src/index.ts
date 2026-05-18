@@ -32,10 +32,19 @@ const allowedOrigins = [
 // HTTP CORS
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    // Normalize origins by stripping trailing slashes for a robust match
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    const isAllowed = allowedOrigins.some(allowed => allowed.replace(/\/$/, '') === normalizedOrigin);
+    
+    if (isAllowed) {
       callback(null, true);
     } else {
-      callback(new Error(`CORS: Origin ${origin} not allowed`));
+      // Just pass false instead of throwing a hard error which can disrupt the preflight pipeline
+      callback(null, false);
     }
   },
   credentials: true,
