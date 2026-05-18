@@ -11,7 +11,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={`flex flex-col w-full ${containerClassName}`} style={containerStyle}>
         {label && (
-          <label className="block font-sans text-[11px] font-semibold tracking-[0.08em] text-[var(--color-text-secondary)] uppercase mb-1.5 select-none">
+          <label className="block font-sans text-[13px] font-semibold tracking-[0.06em] text-[var(--color-text-secondary)] uppercase mb-2 select-none">
             {label}
           </label>
         )}

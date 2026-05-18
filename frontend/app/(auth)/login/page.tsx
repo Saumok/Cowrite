@@ -157,7 +157,7 @@ export default function LoginPage() {
 
           {/* Password input field */}
           <div className="flex flex-col" style={{ marginBottom: '32px' }}>
-            <label className="block font-sans text-[11px] font-semibold tracking-[0.08em] text-[var(--color-text-secondary)] uppercase mb-2 select-none">
+            <label className="block font-sans text-[13px] font-semibold tracking-[0.06em] text-[var(--color-text-secondary)] uppercase mb-2 select-none">
               Password
             </label>
             <div className="relative w-full">
