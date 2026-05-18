@@ -36,11 +36,24 @@ export function Navbar({ user }: NavbarProps) {
         backdropFilter: 'var(--glass-primary-blur)',
         WebkitBackdropFilter: 'var(--glass-primary-blur)',
         borderBottom: '1px solid var(--glass-primary-border)',
-        borderTop: '1px solid rgba(255,255,255,0.9)',
         boxShadow: 'var(--glass-primary-shadow)',
         transition: 'all 200ms ease',
       }}
     >
+      {/* Top shimmer line */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '1px',
+          background: 'rgba(255,255,255,0.85)',
+          pointerEvents: 'none',
+        }}
+      />
+
       <div
         style={{
           width: '100%',
@@ -55,7 +68,7 @@ export function Navbar({ user }: NavbarProps) {
         }}
         className="max-md:px-5"
       >
-        {/* LEFT — Logo */}
+        {/* LEFT — Logo + Wordmark */}
         <div
           onClick={() => router.push('/dashboard')}
           style={{
@@ -66,44 +79,45 @@ export function Navbar({ user }: NavbarProps) {
             userSelect: 'none',
             transition: 'opacity 150ms ease',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.75')}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
         >
-          {/* SVG pen icon */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
-            <path 
-              d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76z" 
-              stroke="var(--color-text-heading)" 
-              strokeWidth="2.2" 
-              strokeLinecap="round" 
+          {/* Custom pen nib SVG logo */}
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" className="flex-shrink-0">
+            <circle cx="15" cy="15" r="14" fill="var(--color-accent)" opacity="0.12" />
+            <path
+              d="M20 10L10 20M17 8l5 5-10 10H8v-4L18 9l-1-1z"
+              stroke="var(--color-accent)"
+              strokeWidth="1.8"
+              strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <line 
-              x1="16" 
-              y1="8" 
-              x2="2" 
-              y2="22" 
-              stroke="var(--color-text-heading)" 
-              strokeWidth="2.2"
+            <path
+              d="M10 20l-2 2"
+              stroke="var(--color-accent)"
+              strokeWidth="1.8"
+              strokeLinecap="round"
             />
           </svg>
 
-          {/* Cowrite text */}
+          {/* Cowrite wordmark */}
           <span
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: '24px',
+              fontSize: '22px',
+              fontStyle: 'italic',
               color: 'var(--color-text-heading)',
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.01em',
+              lineHeight: 1,
             }}
           >
             Cowrite
           </span>
         </div>
 
-        {/* RIGHT — Actions */}
+        {/* RIGHT — User actions */}
         {user && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             {/* User avatar pill */}
             <div
               style={{
@@ -115,51 +129,55 @@ export function Navbar({ user }: NavbarProps) {
                 WebkitBackdropFilter: 'var(--glass-btn-blur)',
                 border: '1px solid var(--glass-btn-border)',
                 borderRadius: '999px',
-                padding: '5px 14px 5px 5px',
+                padding: '4px 14px 4px 4px',
                 boxShadow: 'var(--glass-btn-shadow)',
+                transition: 'all 200ms ease',
               }}
             >
-              {/* Avatar circle */}
+              {/* Avatar gradient circle */}
               <div
                 style={{
-                  width: '34px',
-                  height: '34px',
+                  width: '32px',
+                  height: '32px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, var(--blob-orange), var(--blob-blush))',
+                  background: 'linear-gradient(135deg, var(--blob-orange) 0%, var(--blob-blush) 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
+                  boxShadow: '0 2px 6px rgba(196,120,90,0.25)',
                 }}
                 title={user.name}
               >
                 <span
                   style={{
                     fontFamily: 'var(--font-sans)',
-                    fontSize: '13px',
-                    fontWeight: 600,
+                    fontSize: '12px',
+                    fontWeight: 700,
                     color: 'white',
+                    letterSpacing: '0.03em',
                   }}
                 >
                   {getInitials(user.name)}
                 </span>
               </div>
 
-              {/* Name text — hidden on mobile */}
+              {/* Name — hidden on small screens */}
               <span
                 className="hidden sm:block"
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '13px',
+                  fontSize: '13.5px',
                   fontWeight: 500,
                   color: 'var(--color-text-body)',
+                  letterSpacing: '-0.01em',
                 }}
               >
                 {user.name.split(' ')[0]}
               </span>
             </div>
 
-            {/* Logout button — glass ghost pill */}
+            {/* Logout glass pill button */}
             <button
               onClick={handleLogout}
               style={{
@@ -170,13 +188,14 @@ export function Navbar({ user }: NavbarProps) {
                 borderRadius: '999px',
                 padding: '8px 18px',
                 fontFamily: 'var(--font-sans)',
-                fontSize: '14px',
+                fontSize: '13.5px',
                 fontWeight: 500,
                 color: 'var(--color-text-secondary)',
                 boxShadow: 'var(--glass-btn-shadow)',
                 cursor: 'pointer',
                 transition: 'all 200ms ease',
                 userSelect: 'none',
+                letterSpacing: '-0.01em',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = 'var(--color-accent-light)';
@@ -191,7 +210,7 @@ export function Navbar({ user }: NavbarProps) {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              Logout
+              Sign out
             </button>
           </div>
         )}

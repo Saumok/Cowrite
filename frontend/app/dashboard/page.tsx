@@ -208,15 +208,16 @@ export default function DashboardPage() {
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            background: 'linear-gradient(135deg, #2C2420 0%, #8B5A3C 60%, #C4785A 100%)',
+            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+            background: 'linear-gradient(135deg, var(--color-text-heading) 0%, #7A4A30 55%, var(--color-accent) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            marginBottom: '12px',
+            marginBottom: '10px',
+            letterSpacing: '-0.02em',
           }}
         >
-          {getGreeting()}, {user.name.split(' ')[0]}
+          {getGreeting()}, {user.name.split(' ')[0]}.
         </h1>
 
         {/* ROW 2: Subtitle */}
@@ -492,30 +493,56 @@ export default function DashboardPage() {
         />
       )}
 
-      {/* Cabinet Slide-over Drawer FIX */}
+      {/* Cabinet Slide-over Drawer */}
       <div
-        className="fixed top-0 right-0 h-full w-full max-w-[420px] z-[160] transition-transform duration-300 p-8 flex flex-col justify-between"
+        className="fixed top-0 right-0 h-full w-full max-w-[420px] z-[160] flex flex-col justify-between"
         style={{
           transform: archiveOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 320ms cubic-bezier(0.32, 0.72, 0, 1)',
           background: 'var(--glass-modal-bg)',
           backdropFilter: 'var(--glass-modal-blur)',
           WebkitBackdropFilter: 'var(--glass-modal-blur)',
-          borderLeft: '1px solid var(--glass-modal-border)',
-          boxShadow: 'var(--glass-modal-shadow)',
+          borderLeft: '1px solid rgba(255,255,255,0.55)',
+          boxShadow: '-12px 0 48px rgba(44,36,32,0.12), inset 1px 0 0 rgba(255,255,255,0.70)',
+          padding: '0',
         }}
       >
-        <div>
-          <div className="flex flex-col mb-8 mt-4 select-none">
-            <h2 style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: '26px', color: 'var(--color-text-heading)', marginBottom: '6px' }}>
-              Archive Cabinet
-            </h2>
-            <p className="text-[14px] font-sans" style={{ color: 'var(--color-text-secondary)' }}>
-              {archivedNotes.length} card{archivedNotes.length !== 1 ? 's' : ''} in catalog
-            </p>
+        {/* Drawer Header */}
+        <div
+          style={{
+            padding: '32px 32px 24px',
+            borderBottom: '1px solid rgba(196,181,173,0.20)',
+            background: 'rgba(255,253,250,0.50)',
+            flexShrink: 0,
+          }}
+        >
+          {/* Top shimmer */}
+          <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'rgba(255,255,255,0.90)', pointerEvents:'none' }} />
+          <div className="flex items-center gap-3 mb-1 select-none">
+            <div style={{
+              width:'36px', height:'36px', borderRadius:'10px',
+              background:'var(--color-accent-light)',
+              border:'1px solid rgba(196,120,90,0.20)',
+              display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0,
+            }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <div>
+              <h2 style={{ fontFamily:'var(--font-display)', fontStyle:'italic', fontSize:'22px', color:'var(--color-text-heading)', lineHeight:1 }}>
+                Archive Cabinet
+              </h2>
+              <p className="text-[13px] font-sans mt-0.5" style={{ color:'var(--color-text-secondary)' }}>
+                {archivedNotes.length} card{archivedNotes.length !== 1 ? 's' : ''} archived
+              </p>
+            </div>
           </div>
+        </div>
+        <div style={{ flex:1, overflow:'hidden', display:'flex', flexDirection:'column', padding:'24px 32px 0' }}>
 
           {/* Scrollable catalog file drawer */}
-          <div className="overflow-y-auto max-h-[calc(100vh-210px)] pr-2 space-y-4" style={{ scrollbarWidth: 'thin' }}>
+          <div className="overflow-y-auto flex-1 pr-1 space-y-3 pb-4" style={{ scrollbarWidth: 'thin', maxHeight: 'calc(100vh - 260px)' }}>
             {archivedNotes.length === 0 ? (
               <div className="text-center py-16 px-4 select-none">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[rgba(196,181,173,0.12)] mx-auto mb-4">
@@ -616,7 +643,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="pt-4 mt-auto">
+        <div style={{ padding:'20px 32px 32px', flexShrink:0, borderTop:'1px solid rgba(196,181,173,0.18)' }}>
           <button 
             onClick={() => setArchiveOpen(false)}
             style={{
