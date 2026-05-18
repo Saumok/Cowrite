@@ -7,13 +7,20 @@ export const getSocket = (): Socket => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     
     socket = io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000', {
-      auth: { token },
+      auth: (cb) => {
+        const currentToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        cb({ token: currentToken });
+      },
       reconnection: true,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 10000,
       randomizationFactor: 0.5,
       autoConnect: false,
+    });
+
+    socket.onAny((event, ...args) => {
+      console.log('🔵 SOCKET EVENT:', event, args);
     });
   }
   

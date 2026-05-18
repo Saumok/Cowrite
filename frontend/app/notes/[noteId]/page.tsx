@@ -149,6 +149,7 @@ export default function NoteEditorPage() {
     });
 
     socket.on('receive-changes', ({ content: newContent }: { content: string }) => {
+      isRemoteUpdate.current = true;
       setContent(newContent);
       setIsReceiving(true);
       setTimeout(() => setIsReceiving(false), 600);
@@ -218,8 +219,15 @@ export default function NoteEditorPage() {
     debouncedSave(newTitle, content);
   };
 
+  const isRemoteUpdate = useRef(false);
+
   // Handle content change
   const handleContentChange = (newContent: string) => {
+    if (isRemoteUpdate.current) {
+      isRemoteUpdate.current = false;
+      return;
+    }
+    
     setContent(newContent);
 
     // Emit to socket for real-time sync
