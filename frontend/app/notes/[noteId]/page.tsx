@@ -162,14 +162,10 @@ export default function NoteEditorPage() {
       setTypingUsers((prev) => new Set(prev).add(userName));
     });
 
-    socket.on('user-stopped-typing', ({ userId }: { userId: string }) => {
+    socket.on('user-stopped-typing', ({ userName }: { userId: string; userName: string }) => {
       setTypingUsers((prev) => {
         const next = new Set(prev);
-        collaborators.forEach((c) => {
-          if (c.userId === userId) {
-            next.delete(c.userName);
-          }
-        });
+        if (userName) next.delete(userName);
         return next;
       });
     });
@@ -190,7 +186,7 @@ export default function NoteEditorPage() {
       socket.off('error');
       disconnectSocket();
     };
-  }, [user, noteId, note, collaborators]);
+  }, [user, noteId, note]); // REMOVED `collaborators` dependency!
 
   // Auto-save with debounce
   const saveNote = useCallback(

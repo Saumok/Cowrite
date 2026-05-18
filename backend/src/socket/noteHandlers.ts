@@ -80,7 +80,7 @@ export function registerNoteHandlers(io: Server, socket: Socket) {
   });
 
   socket.on('typing-stop', ({ noteId }: { noteId: string }) => {
-    socket.to(`note-${noteId}`).emit('user-stopped-typing', { userId });
+    socket.to(`note-${noteId}`).emit('user-stopped-typing', { userId, userName });
   });
 
   // LEAVE NOTE ROOM
