@@ -3,6 +3,7 @@
 // Trigger commit to force Vercel to redeploy the cinematic landing page
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { TiltCard } from '@/components/TiltCard';
 
 export default function CinematicLandingPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -391,7 +392,7 @@ export default function CinematicLandingPage() {
                 body: 'Note cards show title, last-updated time, and collaborator count. Archive, search, and create with one click.',
               },
             ].map((card, i) => (
-              <div
+              <TiltCard
                 key={i}
                 className="relative p-8 md:p-10 rounded-3xl cursor-default flex flex-col h-full"
                 style={{
@@ -400,18 +401,16 @@ export default function CinematicLandingPage() {
                   WebkitBackdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255,255,255,0.11)',
                   boxShadow: '0 6px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.11)',
-                  transition: 'all 280ms ease',
+                  transition: 'transform 0.1s ease-out, background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
                   e.currentTarget.style.borderColor = `${card.stroke}44`;
-                  e.currentTarget.style.transform = 'translateY(-3px)';
                   e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.30), 0 0 0 1px ${card.stroke}22, inset 0 1px 0 rgba(255,255,255,0.16)`;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.11)';
-                  e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = '0 6px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.11)';
                 }}
               >
@@ -430,7 +429,7 @@ export default function CinematicLandingPage() {
                 <p className="text-[13px] leading-[1.65] select-none" style={{ color: 'rgba(255,255,255,0.48)' }}>
                   {card.body}
                 </p>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -474,7 +473,7 @@ export default function CinematicLandingPage() {
                 accent: '#A8C4B8',
               },
             ].map((item, i) => (
-              <div
+              <TiltCard
                 key={i}
                 className="relative pl-10 pr-8 py-8 rounded-3xl flex flex-col"
                 style={{
@@ -483,17 +482,15 @@ export default function CinematicLandingPage() {
                   WebkitBackdropFilter: 'blur(24px)',
                   border: '1px solid rgba(255,255,255,0.11)',
                   boxShadow: '0 8px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.11)',
-                  transition: 'all 300ms ease',
+                  transition: 'transform 0.1s ease-out, background 0.3s ease, border-color 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'rgba(255,255,255,0.09)';
                   e.currentTarget.style.borderColor = `${item.accent}44`;
-                  e.currentTarget.style.transform = 'translateY(-3px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.11)';
-                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 {/* Accent left strip */}
@@ -514,7 +511,7 @@ export default function CinematicLandingPage() {
                     {item.meta} · {item.author}
                   </span>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>

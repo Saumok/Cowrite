@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { formatDistanceToNow } from '@/lib/utils';
 import { NoteShare } from '@/types';
+import { TiltCard } from '@/components/TiltCard';
 
 interface NoteCardProps {
   noteId: string;
@@ -55,7 +56,7 @@ export function NoteCard({
   const delay = Math.min(index * 80, 560);
 
   return (
-    <article
+    <TiltCard
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -273,6 +274,6 @@ export function NoteCard({
           )}
         </div>
       </div>
-    </article>
+    </TiltCard>
   );
 }
