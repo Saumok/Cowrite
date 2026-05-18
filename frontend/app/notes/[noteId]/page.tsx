@@ -45,7 +45,8 @@ export default function NoteEditorPage() {
   // Calculate clean text for the textarea (no base64 sketches)
   const cleanText = useMemo(() => {
     if (!content) return '';
-    return content.replace(/!\[Fountain Pen Sketch\]\(data:image\/png;base64,[^)]+\)/g, '').trim();
+    // Strip sketches AND any preceding newlines used for spacing, without trimming user trailing spaces/newlines
+    return content.replace(/(?:\r?\n)*!\[Fountain Pen Sketch\]\(data:image\/png;base64,[^)]+\)/g, '');
   }, [content]);
 
   // Extract all base64 sketches to render visually as Polaroid snapshots!
