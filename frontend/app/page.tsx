@@ -394,7 +394,7 @@ export default function CinematicLandingPage() {
             ].map((card, i) => (
               <TiltCard
                 key={i}
-                className="relative p-8 md:p-10 rounded-3xl cursor-default flex flex-col h-full"
+                className="relative p-10 md:p-12 rounded-3xl cursor-default flex flex-col items-center text-center h-full justify-center"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
                   backdropFilter: 'blur(20px)',
@@ -417,16 +417,16 @@ export default function CinematicLandingPage() {
                 {/* Shimmer top */}
                 <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'rgba(255,255,255,0.13)', borderRadius: '999px' }} />
 
-                <div className="mb-4 w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${card.stroke}33` }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={card.stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="mb-6 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${card.stroke}44` }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={card.stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     {card.icon}
                   </svg>
                 </div>
 
-                <h4 className="text-[15px] font-semibold mb-2 select-none" style={{ color: '#ffffff', fontFamily: "'Inter', sans-serif" }}>
+                <h4 className="text-[17px] font-semibold mb-3 select-none tracking-wide" style={{ color: '#ffffff', fontFamily: "'Inter', sans-serif" }}>
                   {card.label}
                 </h4>
-                <p className="text-[13px] leading-[1.65] select-none" style={{ color: 'rgba(255,255,255,0.48)' }}>
+                <p className="text-[14px] leading-[1.8] select-none" style={{ color: 'rgba(255,255,255,0.60)' }}>
                   {card.body}
                 </p>
               </TiltCard>
