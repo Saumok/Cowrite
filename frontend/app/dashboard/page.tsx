@@ -517,36 +517,97 @@ export default function DashboardPage() {
           {/* Scrollable catalog file drawer */}
           <div className="overflow-y-auto max-h-[calc(100vh-210px)] pr-2 space-y-4" style={{ scrollbarWidth: 'thin' }}>
             {archivedNotes.length === 0 ? (
-              <div className="text-center py-16 px-4">
-                <p className="text-[16px] font-display italic text-[var(--color-text-muted)] mt-10">The catalog drawer is empty.</p>
+              <div className="text-center py-16 px-4 select-none">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[rgba(196,181,173,0.12)] mx-auto mb-4">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                  </svg>
+                </div>
+                <p className="text-[15px] font-display italic text-[var(--color-text-muted)]">The catalog drawer is empty.</p>
               </div>
             ) : (
               archivedNotes.map((note) => (
                 <div 
                   key={note.id}
-                  className="bg-[var(--glass-card-bg)] p-5 rounded-lg border border-[var(--glass-card-border)] shadow-[var(--glass-card-shadow)] flex flex-col justify-between transition-all hover:scale-[1.02]"
+                  className="p-4 rounded-xl flex items-center justify-between transition-all duration-200"
+                  style={{
+                    background: '#FDFBFA',
+                    border: '1px solid rgba(196, 181, 173, 0.35)',
+                    boxShadow: '0 2px 8px rgba(44, 36, 32, 0.04)',
+                    borderLeft: '4.5px solid var(--color-accent)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(44, 36, 32, 0.07)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(44, 36, 32, 0.04)';
+                  }}
                 >
-                  <div>
-                    <h4 className="font-display font-normal text-[var(--color-text-heading)] text-[18px] leading-tight truncate mb-1">
-                      {note.title || 'Untitled Note'}
-                    </h4>
-                    <p className="font-sans text-[13px] text-[var(--color-text-secondary)] mb-4 truncate">
-                      Archived on {new Date(note.updatedAt).toLocaleDateString()}
-                    </p>
+                  <div className="flex items-center gap-3.5 min-w-0 flex-1 pr-3 select-none">
+                    {/* Folder icon tab */}
+                    <div className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center bg-[rgba(196,120,90,0.06)] animate-pulse-slow" style={{ border: '1px solid rgba(196,120,90,0.12)' }}>
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-display font-normal text-[var(--color-text-heading)] text-[16px] leading-snug truncate">
+                        {note.title || 'Untitled Note'}
+                      </h4>
+                      <p className="font-sans text-[11px] text-[var(--color-text-secondary)] mt-0.5">
+                        Archived {new Date(note.updatedAt).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
                   
-                  <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-[rgba(196,181,173,0.22)]">
+                  {/* Circle Actions Dock */}
+                  <div className="flex items-center gap-2 flex-shrink-0">
                     <button
                       onClick={() => handleRestoreNote(note)}
-                      className="px-3 py-1.5 rounded bg-[var(--color-accent-light)] text-[var(--color-accent)] font-semibold text-xs border border-[rgba(196,120,90,0.2)] cursor-pointer hover:bg-[var(--color-accent)] hover:text-white transition-all outline-none"
+                      title="Restore Note"
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer border-none"
+                      style={{
+                        background: 'var(--color-accent-light)',
+                        color: 'var(--color-accent)',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'var(--color-accent)';
+                        e.currentTarget.style.color = '#ffffff';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'var(--color-accent-light)';
+                        e.currentTarget.style.color = 'var(--color-accent)';
+                      }}
                     >
-                      Restore
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+                      </svg>
                     </button>
                     <button
                       onClick={() => handleDeletePermanently(note.id)}
-                      className="px-3 py-1.5 rounded bg-[var(--color-elevated)] text-[var(--color-text-secondary)] font-semibold text-xs border border-[var(--color-border)] cursor-pointer hover:bg-[#C0392B] hover:text-white hover:border-[#C0392B] transition-all outline-none"
+                      title="Delete Permanently"
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer border-none"
+                      style={{
+                        background: 'var(--color-elevated)',
+                        color: 'var(--color-text-secondary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = '#C0392B';
+                        e.currentTarget.style.color = '#ffffff';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'var(--color-elevated)';
+                        e.currentTarget.style.color = 'var(--color-text-secondary)';
+                      }}
                     >
-                      Delete
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -560,26 +621,34 @@ export default function DashboardPage() {
             onClick={() => setArchiveOpen(false)}
             style={{
               width: '100%',
-              background: 'var(--color-elevated)',
-              border: '1px solid var(--color-border)',
+              background: 'var(--color-accent-light)',
+              border: '1px solid rgba(196, 120, 90, 0.2)',
               borderRadius: 'var(--radius-md)',
               fontFamily: 'var(--font-sans)',
               fontSize: '14px',
-              fontWeight: 500,
-              color: 'var(--color-text-body)',
+              fontWeight: 600,
+              color: 'var(--color-accent)',
               padding: '14px',
               cursor: 'pointer',
               transition: 'all 200ms ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
             }}
             onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--color-accent)';
+              e.currentTarget.style.color = '#ffffff';
+            }}
+            onMouseLeave={(e) => {
               e.currentTarget.style.background = 'var(--color-accent-light)';
               e.currentTarget.style.color = 'var(--color-accent)';
             }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'var(--color-elevated)';
-              e.currentTarget.style.color = 'var(--color-text-body)';
-            }}
           >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
             Close Cabinet Drawer
           </button>
         </div>
