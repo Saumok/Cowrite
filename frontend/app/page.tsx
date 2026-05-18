@@ -246,7 +246,7 @@ export default function CinematicLandingPage() {
             <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
               THE WRITING SPACE
             </span>
-            <h2 className="text-4xl sm:text-5xl font-normal mt-4" style={{ fontFamily: "'Instrument Serif', serif" }}>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-4" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
               Exquisite, Focus-Driven Design
             </h2>
             <p className="max-w-xl text-[14px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
@@ -323,7 +323,7 @@ export default function CinematicLandingPage() {
             <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
               OUR MANIFESTO
             </span>
-            <h2 className="text-4xl sm:text-6xl font-normal mt-4 leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>
+            <h2 className="text-4xl sm:text-6xl font-normal mt-4 leading-tight" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
               Blending ink, paper, <br />
               <em className="not-italic" style={{ color: '#F4A96A' }}>and liquid glass.</em>
             </h2>
@@ -370,7 +370,7 @@ export default function CinematicLandingPage() {
             <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
               THE COMMUNITY
             </span>
-            <h2 className="text-4xl sm:text-5xl font-normal mt-4" style={{ fontFamily: "'Instrument Serif', serif" }}>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-4" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
               Echoes in the Stillness
             </h2>
             <p className="max-w-xl mx-auto text-[14px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
@@ -424,7 +424,7 @@ export default function CinematicLandingPage() {
           <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
             CONTACT US
           </span>
-          <h2 className="text-4xl sm:text-5xl font-normal mt-4 mb-2" style={{ fontFamily: "'Instrument Serif', serif" }}>
+          <h2 className="text-4xl sm:text-5xl font-normal mt-4 mb-2" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
             Begin the Conversation
           </h2>
           <p className="text-[13.5px] leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.6)' }}>

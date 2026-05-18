@@ -396,9 +396,15 @@ export default function DashboardPage() {
         ) : displayNotes.length === 0 ? (
           /* PART F — Empty state */
           <div 
-            className="flex flex-col items-center justify-center text-center py-20 px-6 max-w-lg mx-auto bg-[var(--color-surface-glass)] border border-[var(--color-border)] rounded-[var(--radius-xl)] shadow-[var(--shadow-soft)] backdrop-blur-sm"
+            className="flex flex-col items-center justify-center text-center py-20 px-6 max-w-lg mx-auto backdrop-blur-sm"
+            style={{
+              background: 'var(--color-surface-glass)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-xl)',
+              boxShadow: 'var(--shadow-soft)',
+            }}
           >
-            {/* SVG open book outline illustration (80px) */}
+            {/* SVG illustration */}
             <svg 
               width="80" 
               height="80" 
@@ -408,10 +414,21 @@ export default function DashboardPage() {
               strokeWidth="1.5" 
               strokeLinecap="round" 
               strokeLinejoin="round"
-              className="select-none pointer-events-none text-[var(--color-text-muted)]"
+              className="select-none pointer-events-none"
             >
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              {activeTab === 'shared' ? (
+                <>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </>
+              ) : (
+                <>
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </>
+              )}
             </svg>
 
             <h3 
@@ -424,30 +441,48 @@ export default function DashboardPage() {
                 color: 'var(--color-text-heading)',
               }}
             >
-              Your canvas is empty
+              {activeTab === 'shared' ? 'No shared notes yet' : 'Your canvas is empty'}
             </h3>
             
             <p 
               style={{ 
                 color: 'var(--color-text-secondary)', 
                 fontSize: '15px', 
-                marginBottom: '24px',
+                marginBottom: '28px',
                 fontFamily: 'var(--font-sans)',
+                lineHeight: '1.6',
               }}
             >
               {searchQuery
-                ? 'No notes match your search parameters.'
+                ? 'No notes match your search.'
+                : activeTab === 'shared'
+                ? 'Notes shared with you by collaborators will appear here.'
                 : 'Create your first note and start writing.'}
             </p>
             
             {!searchQuery && activeTab === 'my' && (
-              <Button 
-                onClick={handleCreateNote} 
-                disabled={creating} 
-                className="mx-auto shadow-md"
+              <button
+                onClick={handleCreateNote}
+                disabled={creating}
+                style={{
+                  background: 'linear-gradient(135deg, var(--color-accent), #B85C3A)',
+                  border: 'none',
+                  borderRadius: '999px',
+                  padding: '12px 28px',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: 'white',
+                  cursor: creating ? 'not-allowed' : 'pointer',
+                  opacity: creating ? 0.7 : 1,
+                  boxShadow: '0 4px 16px rgba(196,120,90,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
+                  transition: 'all 200ms ease',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
               >
-                {creating ? 'Creating...' : '+ Create Note'}
-              </Button>
+                {creating ? 'Creating…' : '+ Create Note'}
+              </button>
             )}
           </div>
         ) : (
