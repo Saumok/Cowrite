@@ -238,7 +238,7 @@ export default function CinematicLandingPage() {
          ========================================= */}
       <section 
         id="section-studio" 
-        className="w-full py-32 px-8 flex flex-col items-center justify-center relative border-t border-[rgba(255,255,255,0.06)]"
+        className="w-full py-44 px-8 flex flex-col items-center justify-center relative border-t border-[rgba(255,255,255,0.06)]"
         style={{ background: 'linear-gradient(180deg, #0D141D 0%, #080D14 100%)' }}
       >
         <div className="max-w-6xl w-full flex flex-col items-center select-none">
@@ -295,7 +295,7 @@ export default function CinematicLandingPage() {
                     className="absolute -top-4 left-32 px-1.5 py-0.5 rounded text-[10px] text-white font-medium select-none"
                     style={{ background: 'var(--color-accent, #C4785A)' }}
                   >
-                    Shivam
+                    Guest
                   </span>
                   Here in the quiet, ideas take form. We block out the noise of modern algorithms to construct something quiet, meaningful, and enduring.
                   <span className="absolute bottom-0 left-[225px] w-[2px] h-[17px]" style={{ background: 'var(--color-accent, #C4785A)' }} />
@@ -314,7 +314,7 @@ export default function CinematicLandingPage() {
          ========================================= */}
       <section
         id="section-about"
-        className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
+        className="w-full py-44 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: '#080D14' }}
       >
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(196,120,90,0.05)', filter: 'blur(120px)' }} />
@@ -439,7 +439,7 @@ export default function CinematicLandingPage() {
          ========================================= */}
       <section
         id="section-journal"
-        className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
+        className="w-full py-44 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: 'linear-gradient(180deg, #080D14 0%, #0D141D 100%)' }}
       >
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(168,192,214,0.05)', filter: 'blur(100px)' }} />
@@ -523,7 +523,7 @@ export default function CinematicLandingPage() {
          ========================================= */}
       <section
         id="section-reach"
-        className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
+        className="w-full py-44 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: '#0D141D' }}
       >
         <div className="absolute top-0 right-1/3 w-[350px] h-[350px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(196,120,90,0.06)', filter: 'blur(90px)' }} />
