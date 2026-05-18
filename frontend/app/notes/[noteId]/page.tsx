@@ -133,10 +133,16 @@ export default function NoteEditorPage() {
     const socket = getSocket();
     socket.connect();
 
-    socket.on('connect', () => {
+    const joinNote = () => {
       setSocketStatus('connected');
       socket.emit('join-note', { noteId });
-    });
+    };
+
+    if (socket.connected) {
+      joinNote();
+    }
+
+    socket.on('connect', joinNote);
 
     socket.on('disconnect', () => {
       setSocketStatus('reconnecting');
