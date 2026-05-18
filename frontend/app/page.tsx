@@ -289,7 +289,7 @@ export default function CinematicLandingPage() {
                   Writing is the conversation that our thoughts have on paper. When we co-write, we align our heartbeats across distance, turning static words into dynamic expressions.
                   <span className="relative inline-block ml-1">
                     <span 
-                      className="absolute -top-5 -left-1 px-1.5 py-0.5 rounded text-[10px] text-white font-medium select-none whitespace-nowrap z-10"
+                      className="absolute top-0 left-2 px-1.5 py-0.5 rounded text-[10px] text-white font-medium select-none whitespace-nowrap z-10"
                       style={{ background: 'var(--color-accent, #C4785A)' }}
                     >
                       Guest
@@ -337,7 +337,7 @@ export default function CinematicLandingPage() {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
             {[
               { value: '<100ms', label: 'Socket Latency' },
               { value: '≥3', label: 'Live Collaborators' },
@@ -352,7 +352,7 @@ export default function CinematicLandingPage() {
           </div>
 
           {/* 2×3 glass feature cards — short text, no overflow */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {[
               {
                 stroke: '#F4A96A',
@@ -393,7 +393,7 @@ export default function CinematicLandingPage() {
             ].map((card, i) => (
               <div
                 key={i}
-                className="relative p-8 rounded-3xl cursor-default flex flex-col h-full"
+                className="relative p-8 md:p-10 rounded-3xl cursor-default flex flex-col h-full"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
                   backdropFilter: 'blur(20px)',
