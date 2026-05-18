@@ -310,95 +310,122 @@ export default function CinematicLandingPage() {
       </section>
 
       {/* =========================================
-         ABOUT SECTION — Liquid Glass Feature Cards
+         ABOUT SECTION — 6 feature cards in 2×3 grid
          ========================================= */}
       <section
         id="section-about"
         className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: '#080D14' }}
       >
-        {/* Ambient blob */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(196,120,90,0.05)', filter: 'blur(120px)' }} />
 
         <div className="max-w-6xl w-full relative z-10">
           {/* Header */}
-          <div className="text-center mb-20 select-none">
+          <div className="text-center mb-16 select-none">
             <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: '#C4785A' }}>
-              OUR MANIFESTO
+              WHY COWRITE
             </span>
-            <h2 className="text-4xl sm:text-6xl font-normal mt-5 leading-tight" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
-              Blending ink, paper,{' '}
-              <em className="not-italic" style={{ color: '#F4A96A' }}>and liquid glass.</em>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-4 leading-tight" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
+              Built for real collaboration,{' '}
+              <em className="not-italic" style={{ color: '#F4A96A' }}>not compromise.</em>
             </h2>
-            <p className="max-w-xl mx-auto text-[15px] leading-relaxed mt-6" style={{ color: 'rgba(255,255,255,0.55)', textAlign: 'center' }}>
-              We believe digital interfaces shouldn't be cold and industrial. Cowrite captures the warm tactile weight of leather-bound notebooks, typewriter spools, and cotton fibers — merged into a high-performance, real-time collaboration canvas.
+            <p className="max-w-xl mx-auto text-[14px] leading-relaxed mt-5" style={{ color: 'rgba(255,255,255,0.50)', textAlign: 'center' }}>
+              Cowrite combines a Socket.IO real-time engine with a warm liquid glass interface — so working together feels as natural as writing in the same room.
             </p>
           </div>
 
-          {/* 3-column glass feature cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Stats row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            {[
+              { value: '<100ms', label: 'Socket Latency' },
+              { value: '≥3', label: 'Live Collaborators' },
+              { value: 'JWT', label: 'Secure Auth' },
+              { value: '2s', label: 'Auto-save Debounce' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center py-5 px-4 rounded-2xl select-none" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div className="text-2xl font-semibold mb-1" style={{ fontFamily: "'Instrument Serif', serif", color: '#F4A96A' }}>{stat.value}</div>
+                <div className="text-[11px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 2×3 glass feature cards — short text, no overflow */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4A96A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                  </svg>
-                ),
-                label: 'Tactile Layering',
-                body: 'Rich shadow maps, warm paper textures, and terracotta border highlights that respond instantly to your focus.',
+                stroke: '#F4A96A',
+                icon: <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>,
+                label: 'Real-Time Editing',
+                body: 'Every keystroke syncs instantly via Socket.IO rooms. No page refresh — just fluid, live co-authoring.',
               },
               {
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8C4B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                  </svg>
-                ),
-                label: 'Sub-Millisecond Sync',
-                body: 'Socket.IO channels push every keystroke in real time. Co-authoring feels as natural as speaking in the same room.',
+                stroke: '#A8C4B8',
+                icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>,
+                label: 'Granular Sharing',
+                body: 'Share any note as Viewer (read-only) or Editor. Owners manage collaborators from the Share Modal.',
               },
               {
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A8D4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                  </svg>
-                ),
-                label: 'Privacy First',
-                body: 'Your notes are yours. Role-based access, granular sharing controls, and zero tracking by default.',
+                stroke: '#C9A8D4',
+                icon: <><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>,
+                label: 'JWT Security',
+                body: 'Every REST call and Socket.IO connection is guarded by signed JWT tokens. Your notes stay private.',
+              },
+              {
+                stroke: '#8BB8D4',
+                icon: <><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></>,
+                label: 'Auto-Save',
+                body: 'A 2-second debounce auto-saves content to the database. No manual save button needed.',
+              },
+              {
+                stroke: '#D4A8A8',
+                icon: <><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></>,
+                label: 'Search & Filter',
+                body: 'Instantly search across note titles and content. Toggle between your notes and shared notes.',
+              },
+              {
+                stroke: '#A8D4C4',
+                icon: <><line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></>,
+                label: 'Smart Dashboard',
+                body: 'Note cards show title, last-updated time, and collaborator count. Archive, search, and create with one click.',
               },
             ].map((card, i) => (
               <div
                 key={i}
-                className="group relative p-7 rounded-3xl cursor-default"
+                className="relative p-6 rounded-3xl cursor-default"
                 style={{
-                  background: 'rgba(255,255,255,0.07)',
+                  background: 'rgba(255,255,255,0.06)',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)',
-                  transition: 'all 300ms ease',
+                  border: '1px solid rgba(255,255,255,0.11)',
+                  boxShadow: '0 6px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.11)',
+                  transition: 'all 280ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.11)';
-                  e.currentTarget.style.borderColor = 'rgba(196,120,90,0.35)';
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 20px 56px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
+                  e.currentTarget.style.borderColor = `${card.stroke}44`;
+                  e.currentTarget.style.transform = 'translateY(-3px)';
+                  e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.30), 0 0 0 1px ${card.stroke}22, inset 0 1px 0 rgba(255,255,255,0.16)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.11)';
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)';
+                  e.currentTarget.style.boxShadow = '0 6px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.11)';
                 }}
               >
-                {/* Glass shimmer top line */}
-                <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'rgba(255,255,255,0.14)', borderRadius: '999px' }} />
-                <div className="mb-5 w-11 h-11 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
-                  {card.icon}
+                {/* Shimmer top */}
+                <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'rgba(255,255,255,0.13)', borderRadius: '999px' }} />
+
+                <div className="mb-4 w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${card.stroke}33` }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={card.stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    {card.icon}
+                  </svg>
                 </div>
-                <h4 className="text-[17px] font-medium mb-3 select-none" style={{ color: '#ffffff', fontFamily: "'Instrument Serif', serif" }}>
+
+                <h4 className="text-[15px] font-semibold mb-2 select-none" style={{ color: '#ffffff', fontFamily: "'Inter', sans-serif" }}>
                   {card.label}
                 </h4>
-                <p className="text-[13.5px] leading-relaxed select-none" style={{ color: 'rgba(255,255,255,0.50)' }}>
+                <p className="text-[13px] leading-[1.65] select-none" style={{ color: 'rgba(255,255,255,0.48)' }}>
                   {card.body}
                 </p>
               </div>
@@ -408,7 +435,7 @@ export default function CinematicLandingPage() {
       </section>
 
       {/* =========================================
-         JOURNAL SECTION — Premium Quote Cards
+         JOURNAL SECTION — Quote Cards
          ========================================= */}
       <section
         id="section-journal"
@@ -418,74 +445,70 @@ export default function CinematicLandingPage() {
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(168,192,214,0.05)', filter: 'blur(100px)' }} />
 
         <div className="max-w-5xl w-full relative z-10">
-          {/* Header */}
-          <div className="text-center mb-16 select-none">
+          <div className="text-center mb-14 select-none">
             <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: '#C4785A' }}>
-              THE COMMUNITY
+              FROM THE COMMUNITY
             </span>
-            <h2 className="text-4xl sm:text-5xl font-normal mt-5" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-4" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
               Echoes in the Stillness
             </h2>
-            <p className="max-w-md mx-auto text-[14px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
-              Quiet notes, poetry, and journals from the Cowrite community.
+            <p className="max-w-sm mx-auto text-[14px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              Voices from Cowrite users who found their flow.
             </p>
           </div>
 
-          {/* 2-column quote cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
-                quote: '"A quiet room, a glowing screen, and minds aligned perfectly across distance. We spoke without talking — writing our dreams onto the digital paper."',
-                meta: 'Journal Entry #42',
+                quote: 'A quiet room, a glowing screen, and minds aligned across distance. We spoke without talking — writing our shared notes onto the same digital page in real time.',
+                meta: 'Student Collaborator',
                 author: 'Anonymous',
                 accent: '#F4A96A',
               },
               {
-                quote: '"Distractions fade into empty space, thoughts gather their natural shape, and suddenly writing becomes breathing again. This is exactly where I belong."',
-                meta: 'Studio Entry #109',
+                quote: 'Distractions fade, thoughts gather their shape, and suddenly writing becomes breathing again. The live sync is so smooth I forget we\'re not in the same room.',
+                meta: 'Remote Team Member',
                 author: 'Elena K.',
                 accent: '#A8C4B8',
               },
             ].map((item, i) => (
               <div
                 key={i}
-                className="relative pl-10 pr-8 py-8 rounded-3xl flex flex-col group"
+                className="relative pl-10 pr-8 py-8 rounded-3xl flex flex-col"
                 style={{
-                  background: 'rgba(255,255,255,0.07)',
+                  background: 'rgba(255,255,255,0.06)',
                   backdropFilter: 'blur(24px)',
                   WebkitBackdropFilter: 'blur(24px)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  boxShadow: '0 8px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)',
-                  transition: 'all 320ms ease',
+                  border: '1px solid rgba(255,255,255,0.11)',
+                  boxShadow: '0 8px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.11)',
+                  transition: 'all 300ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.09)';
                   e.currentTarget.style.borderColor = `${item.accent}44`;
                   e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px ${item.accent}22, inset 0 1px 0 rgba(255,255,255,0.15)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.11)';
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12)';
                 }}
               >
                 {/* Accent left strip */}
-                <div style={{ position: 'absolute', top: '24px', bottom: '24px', left: 0, width: '3px', background: item.accent, borderRadius: '0 3px 3px 0', opacity: 0.75 }} />
+                <div style={{ position: 'absolute', top: '24px', bottom: '24px', left: 0, width: '3px', background: item.accent, borderRadius: '0 3px 3px 0', opacity: 0.7 }} />
 
-                {/* Compact inline open-quote */}
-                <div className="mb-3 select-none" style={{ color: item.accent, opacity: 0.55, fontSize: '28px', lineHeight: 1, fontFamily: "'Instrument Serif', serif", fontWeight: 700 }}>
-                  “
+                {/* Compact quote mark */}
+                <div className="mb-3 select-none" style={{ color: item.accent, opacity: 0.5, fontSize: '26px', lineHeight: 1, fontFamily: "'Instrument Serif', serif" }}>
+                  &#8220;
                 </div>
 
-                <p className="text-[15.5px] leading-[1.8] select-none flex-1" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.88)', fontStyle: 'italic' }}>
-                  {item.quote.replace(/^"|"$/g, '')}
+                <p className="text-[15px] leading-[1.8] select-none" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.85)', fontStyle: 'italic' }}>
+                  {item.quote}
                 </p>
 
-                <div className="flex items-center gap-2.5 mt-6 select-none">
-                  <span className="w-5 h-[1px]" style={{ background: item.accent, opacity: 0.6 }} />
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: 'rgba(255,255,255,0.40)' }}>
+                <div className="flex items-center gap-2.5 mt-5 select-none">
+                  <span className="w-5 h-[1px]" style={{ background: item.accent, opacity: 0.55 }} />
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'rgba(255,255,255,0.38)' }}>
                     {item.meta} · {item.author}
                   </span>
                 </div>
@@ -496,7 +519,7 @@ export default function CinematicLandingPage() {
       </section>
 
       {/* =========================================
-         REACH US SECTION — Premium Glass Form
+         REACH US SECTION — Glass Contact Form
          ========================================= */}
       <section
         id="section-reach"
@@ -506,33 +529,32 @@ export default function CinematicLandingPage() {
         <div className="absolute top-0 right-1/3 w-[350px] h-[350px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(196,120,90,0.06)', filter: 'blur(90px)' }} />
 
         <div className="max-w-lg w-full relative z-10">
-          {/* Header */}
-          <div className="text-center mb-12 select-none">
+          <div className="text-center mb-10 select-none">
             <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: '#C4785A' }}>
-              CONTACT US
+              GET IN TOUCH
             </span>
-            <h2 className="text-4xl sm:text-5xl font-normal mt-5 mb-3" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-4 mb-3" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
               Begin the Conversation
             </h2>
-            <p className="text-[14px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
-              Have a question, feedback, or a collaborative idea? Drop us a line.
+            <p className="text-[14px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              Questions, feedback, or a collaboration idea? We read everything.
             </p>
           </div>
 
           {/* Glass form card */}
           <div
-            className="relative rounded-3xl overflow-hidden"
+            className="relative rounded-3xl"
             style={{
               background: 'rgba(255,255,255,0.06)',
               backdropFilter: 'blur(32px)',
               WebkitBackdropFilter: 'blur(32px)',
-              border: '1px solid rgba(255,255,255,0.18)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.18)',
-              padding: '40px 36px',
+              border: '1px solid rgba(255,255,255,0.16)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.16)',
+              padding: '40px 36px 44px',
             }}
           >
-            {/* Top shimmer */}
-            <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'rgba(255,255,255,0.18)', borderRadius: '999px' }} />
+            {/* Shimmer top */}
+            <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'rgba(255,255,255,0.20)', borderRadius: '999px' }} />
 
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center py-10 text-center select-none">
@@ -543,7 +565,7 @@ export default function CinematicLandingPage() {
                 </div>
                 <h4 className="text-[20px] font-medium mb-2" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>Message Sent</h4>
                 <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                  Thank you. We'll reach out to you through the silence.
+                  Thank you. We&apos;ll reach out through the silence.
                 </p>
               </div>
             ) : (
@@ -553,7 +575,7 @@ export default function CinematicLandingPage() {
                   { id: 'form-email', label: 'Email', type: 'email', value: email, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), placeholder: 'you@example.com' },
                 ].map((field) => (
                   <div key={field.id}>
-                    <label htmlFor={field.id} className="block text-[11px] font-semibold uppercase tracking-[0.10em] mb-2 select-none" style={{ color: 'rgba(255,255,255,0.40)' }}>
+                    <label htmlFor={field.id} className="block text-[11px] font-semibold uppercase tracking-[0.12em] mb-2 select-none" style={{ color: 'rgba(255,255,255,0.38)' }}>
                       {field.label}
                     </label>
                     <input
@@ -566,17 +588,17 @@ export default function CinematicLandingPage() {
                       className="w-full px-4 py-3.5 rounded-2xl text-[14px] outline-none transition-all duration-200"
                       style={{
                         background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.10)',
+                        border: '1px solid rgba(255,255,255,0.12)',
                         color: '#ffffff',
                         fontFamily: "'Inter', sans-serif",
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor = 'rgba(196,120,90,0.55)';
-                        e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.09)';
                         e.currentTarget.style.boxShadow = '0 0 0 4px rgba(196,120,90,0.08)';
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                         e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
                         e.currentTarget.style.boxShadow = 'none';
                       }}
@@ -585,7 +607,7 @@ export default function CinematicLandingPage() {
                 ))}
 
                 <div>
-                  <label htmlFor="form-message" className="block text-[11px] font-semibold uppercase tracking-[0.10em] mb-2 select-none" style={{ color: 'rgba(255,255,255,0.40)' }}>
+                  <label htmlFor="form-message" className="block text-[11px] font-semibold uppercase tracking-[0.12em] mb-2 select-none" style={{ color: 'rgba(255,255,255,0.38)' }}>
                     Message
                   </label>
                   <textarea
@@ -594,21 +616,21 @@ export default function CinematicLandingPage() {
                     required
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Share your thoughts..."
+                    placeholder="Share your thoughts, ideas, or feedback..."
                     className="w-full px-4 py-3.5 rounded-2xl text-[14px] outline-none transition-all duration-200 resize-none"
                     style={{
                       background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.10)',
+                      border: '1px solid rgba(255,255,255,0.12)',
                       color: '#ffffff',
                       fontFamily: "'Inter', sans-serif",
                     }}
                     onFocus={(e) => {
                       e.currentTarget.style.borderColor = 'rgba(196,120,90,0.55)';
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.09)';
                       e.currentTarget.style.boxShadow = '0 0 0 4px rgba(196,120,90,0.08)';
                     }}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                       e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
@@ -617,21 +639,22 @@ export default function CinematicLandingPage() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-2xl font-medium text-white transition-all duration-300 cursor-pointer mt-1 select-none"
+                  className="w-full py-4 rounded-2xl font-semibold text-white transition-all duration-300 cursor-pointer select-none"
                   style={{
-                    background: 'linear-gradient(135deg, #C4785A, #B85C3A)',
+                    background: 'linear-gradient(135deg, #C4785A 0%, #B05238 100%)',
                     border: 'none',
-                    fontSize: '15px',
-                    letterSpacing: '0.02em',
-                    boxShadow: '0 4px 20px rgba(196,120,90,0.30), inset 0 1px 0 rgba(255,255,255,0.20)',
+                    fontSize: '14px',
+                    letterSpacing: '0.04em',
+                    boxShadow: '0 4px 20px rgba(196,120,90,0.32), inset 0 1px 0 rgba(255,255,255,0.22)',
+                    marginTop: '4px',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 28px rgba(196,120,90,0.40), inset 0 1px 0 rgba(255,255,255,0.20)';
+                    e.currentTarget.style.boxShadow = '0 10px 32px rgba(196,120,90,0.44), inset 0 1px 0 rgba(255,255,255,0.22)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(196,120,90,0.30), inset 0 1px 0 rgba(255,255,255,0.20)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(196,120,90,0.32), inset 0 1px 0 rgba(255,255,255,0.22)';
                   }}
                 >
                   Send Message
@@ -652,18 +675,18 @@ export default function CinematicLandingPage() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4785A" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
             </svg>
-            <span className="text-[12px] font-medium" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.45)' }}>
+            <span className="text-[13px] font-medium" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.40)' }}>
               Cowrite
             </span>
           </div>
-          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.25)', fontFamily: "'Inter', sans-serif" }}>
-            © 2026 · Where words echo in the stillness.
+          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.22)', fontFamily: "'Inter', sans-serif" }}>
+            © 2026 · Built by Saumok Kundu · LHCPL-SE-2026-3429
           </p>
           <div className="flex items-center gap-6">
             {['Privacy', 'Terms', 'GitHub'].map((l) => (
-              <a key={l} href="#" className="text-[11px] uppercase tracking-wider transition-colors" style={{ color: 'rgba(255,255,255,0.25)', fontFamily: "'Inter', sans-serif" }}
+              <a key={l} href="#" className="text-[11px] uppercase tracking-wider transition-colors" style={{ color: 'rgba(255,255,255,0.22)', fontFamily: "'Inter', sans-serif" }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#C4785A'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.25)'; }}>
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.22)'; }}>
                 {l}
               </a>
             ))}
