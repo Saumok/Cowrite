@@ -26,6 +26,7 @@ export function registerNoteHandlers(io: Server, socket: Socket) {
 
       const room = `note-${noteId}`;
       socket.join(room);
+      console.log(`Socket ${socket.id} (${userName}) joined room: ${room}`);
 
       // Broadcast updated user list to entire room
       const socketsInRoom = await io.in(room).fetchSockets();
@@ -61,6 +62,7 @@ export function registerNoteHandlers(io: Server, socket: Socket) {
       }
 
       const room = `note-${noteId}`;
+      console.log(`Changes received for ${room} from ${userName}`);
       // Broadcast to everyone in room EXCEPT the sender
       socket.to(room).emit('receive-changes', { content, userId });
     } catch (error) {
