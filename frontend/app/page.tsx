@@ -310,209 +310,366 @@ export default function CinematicLandingPage() {
       </section>
 
       {/* =========================================
-         ABOUT SECTION
+         ABOUT SECTION — Liquid Glass Feature Cards
          ========================================= */}
-      <section 
-        id="section-about" 
-        className="w-full py-32 px-8 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)]"
+      <section
+        id="section-about"
+        className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: '#080D14' }}
       >
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center select-none">
-          {/* Manifesto Left */}
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
+        {/* Ambient blob */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(196,120,90,0.05)', filter: 'blur(120px)' }} />
+
+        <div className="max-w-6xl w-full relative z-10">
+          {/* Header */}
+          <div className="text-center mb-20 select-none">
+            <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: '#C4785A' }}>
               OUR MANIFESTO
             </span>
-            <h2 className="text-4xl sm:text-6xl font-normal mt-4 leading-tight" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
-              Blending ink, paper, <br />
+            <h2 className="text-4xl sm:text-6xl font-normal mt-5 leading-tight" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
+              Blending ink, paper,{' '}
               <em className="not-italic" style={{ color: '#F4A96A' }}>and liquid glass.</em>
             </h2>
-            <p className="text-[14px] leading-relaxed mt-6" style={{ color: 'rgba(255,255,255,0.65)' }}>
-              We believe digital interfaces shouldn't be cold and industrial. Cowrite was born to capture the warm tactile weight of leather-bound booklets, typewriter ink spools, and heavy cotton fibers, merging them seamlessly into a high-performance, real-time collaboration canvas.
+            <p className="max-w-2xl mx-auto text-[15px] leading-relaxed mt-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
+              We believe digital interfaces shouldn't be cold and industrial. Cowrite captures the warm tactile weight of leather-bound notebooks, typewriter spools, and cotton fibers — merged into a high-performance, real-time collaboration canvas.
             </p>
           </div>
 
-          {/* Details Cards Right */}
-          <div className="space-y-6">
-            <div 
-              className="p-6 rounded-2xl border" 
-              style={{ background: 'rgba(255, 255, 255, 0.02)', borderColor: 'rgba(255, 255, 255, 0.06)' }}
-            >
-              <h4 className="text-[18px] font-medium text-white mb-2">Tactile Layering</h4>
-              <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Rich shadow maps, warm paper texture surfaces, and gold-terracotta border highlights that respond instantly to your mouse focus.
-              </p>
-            </div>
-
-            <div 
-              className="p-6 rounded-2xl border" 
-              style={{ background: 'rgba(255, 255, 255, 0.02)', borderColor: 'rgba(255, 255, 255, 0.06)' }}
-            >
-              <h4 className="text-[18px] font-medium text-white mb-2">Sub-Millisecond Sync</h4>
-              <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Powered by high-performance Socket.IO channels, co-authoring note entries happens instantly with zero delay, locking paragraphs safely.
-              </p>
-            </div>
+          {/* 3-column glass feature cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4A96A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                  </svg>
+                ),
+                label: 'Tactile Layering',
+                body: 'Rich shadow maps, warm paper textures, and terracotta border highlights that respond instantly to your focus.',
+              },
+              {
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8C4B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                ),
+                label: 'Sub-Millisecond Sync',
+                body: 'Socket.IO channels push every keystroke in real time. Co-authoring feels as natural as speaking in the same room.',
+              },
+              {
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A8D4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                ),
+                label: 'Privacy First',
+                body: 'Your notes are yours. Role-based access, granular sharing controls, and zero tracking by default.',
+              },
+            ].map((card, i) => (
+              <div
+                key={i}
+                className="group relative p-7 rounded-3xl cursor-default"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.08)',
+                  transition: 'all 300ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                  e.currentTarget.style.borderColor = 'rgba(196,120,90,0.25)';
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.08)';
+                }}
+              >
+                {/* Glass shimmer top line */}
+                <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '1px', background: 'rgba(255,255,255,0.14)', borderRadius: '999px' }} />
+                <div className="mb-5 w-11 h-11 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                  {card.icon}
+                </div>
+                <h4 className="text-[17px] font-medium mb-3 select-none" style={{ color: '#ffffff', fontFamily: "'Instrument Serif', serif" }}>
+                  {card.label}
+                </h4>
+                <p className="text-[13.5px] leading-relaxed select-none" style={{ color: 'rgba(255,255,255,0.50)' }}>
+                  {card.body}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* =========================================
-         JOURNAL SECTION
+         JOURNAL SECTION — Premium Quote Cards
          ========================================= */}
-      <section 
-        id="section-journal" 
-        className="w-full py-32 px-8 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)]"
+      <section
+        id="section-journal"
+        className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: 'linear-gradient(180deg, #080D14 0%, #0D141D 100%)' }}
       >
-        <div className="max-w-6xl w-full select-none">
-          <div className="text-center mb-16">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(168,192,214,0.05)', filter: 'blur(100px)' }} />
+
+        <div className="max-w-5xl w-full relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16 select-none">
+            <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: '#C4785A' }}>
               THE COMMUNITY
             </span>
-            <h2 className="text-4xl sm:text-5xl font-normal mt-4" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-5" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
               Echoes in the Stillness
             </h2>
-            <p className="max-w-xl mx-auto text-[14px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              Read the quiet notes, poetry, and journals crafted by quiet thinkers using Cowrite.
+            <p className="max-w-md mx-auto text-[14px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
+              Quiet notes, poetry, and journals from the Cowrite community.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-            {/* Note 1 */}
-            <div className="liquid-glass p-8 rounded-2xl flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
-              <div>
-                <p className="text-[18px] leading-relaxed italic" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
-                  "A quiet room, a glowing laptop screen, and minds aligned perfectly in the cloud. We spoke without talking, writing our dreams onto the digital paper."
-                </p>
-                <div className="flex items-center gap-2 mt-6 select-none">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--color-accent, #C4785A)' }} />
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.1em]" style={{ color: 'rgba(255, 255, 255, 0.45)' }}>
-                    Journal Entry #42 • Anonymous
-                  </span>
-                </div>
-              </div>
-            </div>
+          {/* 2-column quote cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                quote: '"A quiet room, a glowing screen, and minds aligned perfectly across distance. We spoke without talking — writing our dreams onto the digital paper."',
+                meta: 'Journal Entry #42',
+                author: 'Anonymous',
+                accent: '#F4A96A',
+              },
+              {
+                quote: '"Distractions fade into empty space, thoughts gather their natural shape, and suddenly writing becomes breathing again. This is exactly where I belong."',
+                meta: 'Studio Entry #109',
+                author: 'Elena K.',
+                accent: '#A8C4B8',
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="relative p-8 rounded-3xl flex flex-col justify-between group"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  boxShadow: '0 8px 40px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.08)',
+                  transition: 'all 320ms ease',
+                  minHeight: '220px',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = `${item.accent}33`;
+                  e.currentTarget.style.transform = 'translateY(-3px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {/* Top shimmer */}
+                <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px', background: 'rgba(255,255,255,0.12)', borderRadius: '999px' }} />
+                {/* Accent left strip */}
+                <div style={{ position: 'absolute', top: '24px', bottom: '24px', left: 0, width: '3px', background: item.accent, borderRadius: '0 3px 3px 0', opacity: 0.7 }} />
 
-            {/* Note 2 */}
-            <div className="liquid-glass p-8 rounded-2xl flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
-              <div>
-                <p className="text-[18px] leading-relaxed italic" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
-                  "Distractions fade into empty space, thoughts gather their natural shape, and suddenly writing becomes breathing again. This is exactly where I belong."
+                {/* Large open-quote glyph */}
+                <div className="mb-4 select-none" style={{ fontSize: '56px', lineHeight: 1, color: item.accent, opacity: 0.25, fontFamily: "'Instrument Serif', serif" }}>
+                  "
+                </div>
+
+                <p className="text-[16px] leading-[1.75] select-none" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.85)', fontStyle: 'italic' }}>
+                  {item.quote}
                 </p>
-                <div className="flex items-center gap-2 mt-6 select-none">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--color-accent, #C4785A)' }} />
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.1em]" style={{ color: 'rgba(255, 255, 255, 0.45)' }}>
-                    Studio Entry #109 • Elena K.
+
+                <div className="flex items-center gap-2.5 mt-7 select-none">
+                  <span className="w-5 h-[1px]" style={{ background: item.accent, opacity: 0.6 }} />
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                    {item.meta} · {item.author}
                   </span>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* =========================================
-         REACH US SECTION
+         REACH US SECTION — Premium Glass Form
          ========================================= */}
-      <section 
-        id="section-reach" 
-        className="w-full py-32 px-8 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)]"
+      <section
+        id="section-reach"
+        className="w-full py-28 px-6 flex flex-col items-center justify-center border-t border-[rgba(255,255,255,0.06)] relative"
         style={{ background: '#0D141D' }}
       >
-        <div className="max-w-md w-full flex flex-col items-center text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--color-accent, #C4785A)' }}>
-            CONTACT US
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-normal mt-4 mb-2" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
-            Begin the Conversation
-          </h2>
-          <p className="text-[13.5px] leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.6)' }}>
-            Have a question, feedback, or a collaborative idea? Drop us a line.
-          </p>
+        <div className="absolute top-0 right-1/3 w-[350px] h-[350px] rounded-full pointer-events-none select-none" style={{ background: 'rgba(196,120,90,0.06)', filter: 'blur(90px)' }} />
 
-          {isSubmitted ? (
-            <div 
-              className="w-full p-8 rounded-2xl liquid-glass border flex flex-col items-center justify-center"
-              style={{ borderColor: 'var(--color-accent, #C4785A)' }}
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent, #C4785A)" strokeWidth="2" className="mb-4">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <h4 className="text-[18px] font-medium mb-1">Message Sent</h4>
-              <p className="text-[12px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Thank you! We'll reach out to you through the silence.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleContactSubmit} className="w-full space-y-4 text-left">
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-2 select-none" style={{ color: 'rgba(255, 255, 255, 0.45)' }}>
-                  Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-lg text-sm bg-[rgba(255,255,255,0.03)] border outline-none text-white transition-all focus:border-[var(--color-accent,#C4785A)]"
-                  style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
-                />
+        <div className="max-w-lg w-full relative z-10">
+          {/* Header */}
+          <div className="text-center mb-12 select-none">
+            <span className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: '#C4785A' }}>
+              CONTACT US
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-normal mt-5 mb-3" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>
+              Begin the Conversation
+            </h2>
+            <p className="text-[14px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
+              Have a question, feedback, or a collaborative idea? Drop us a line.
+            </p>
+          </div>
+
+          {/* Glass form card */}
+          <div
+            className="relative rounded-3xl overflow-hidden"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              backdropFilter: 'blur(32px)',
+              WebkitBackdropFilter: 'blur(32px)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)',
+              padding: '40px 36px',
+            }}
+          >
+            {/* Top shimmer */}
+            <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px', background: 'rgba(255,255,255,0.18)', borderRadius: '999px' }} />
+
+            {isSubmitted ? (
+              <div className="flex flex-col items-center justify-center py-10 text-center select-none">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(196,120,90,0.15)', border: '1px solid rgba(196,120,90,0.30)' }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4785A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <h4 className="text-[20px] font-medium mb-2" style={{ fontFamily: "'Instrument Serif', serif", color: '#ffffff' }}>Message Sent</h4>
+                <p className="text-[13px]" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  Thank you. We'll reach out to you through the silence.
+                </p>
               </div>
+            ) : (
+              <form onSubmit={handleContactSubmit} className="flex flex-col gap-5">
+                {[
+                  { id: 'form-name', label: 'Name', type: 'text', value: name, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value), placeholder: 'Your name' },
+                  { id: 'form-email', label: 'Email', type: 'email', value: email, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), placeholder: 'you@example.com' },
+                ].map((field) => (
+                  <div key={field.id}>
+                    <label htmlFor={field.id} className="block text-[11px] font-semibold uppercase tracking-[0.10em] mb-2 select-none" style={{ color: 'rgba(255,255,255,0.40)' }}>
+                      {field.label}
+                    </label>
+                    <input
+                      id={field.id}
+                      type={field.type}
+                      required
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder={field.placeholder}
+                      className="w-full px-4 py-3.5 rounded-2xl text-[14px] outline-none transition-all duration-200"
+                      style={{
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.10)',
+                        color: '#ffffff',
+                        fontFamily: "'Inter', sans-serif",
+                      }}
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(196,120,90,0.55)';
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                        e.currentTarget.style.boxShadow = '0 0 0 4px rgba(196,120,90,0.08)';
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    />
+                  </div>
+                ))}
 
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-2 select-none" style={{ color: 'rgba(255, 255, 255, 0.45)' }}>
-                  Email
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-3 rounded-lg text-sm bg-[rgba(255,255,255,0.03)] border outline-none text-white transition-all focus:border-[var(--color-accent,#C4785A)]"
-                  style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
-                />
-              </div>
+                <div>
+                  <label htmlFor="form-message" className="block text-[11px] font-semibold uppercase tracking-[0.10em] mb-2 select-none" style={{ color: 'rgba(255,255,255,0.40)' }}>
+                    Message
+                  </label>
+                  <textarea
+                    id="form-message"
+                    rows={4}
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Share your thoughts..."
+                    className="w-full px-4 py-3.5 rounded-2xl text-[14px] outline-none transition-all duration-200 resize-none"
+                    style={{
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.10)',
+                      color: '#ffffff',
+                      fontFamily: "'Inter', sans-serif",
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(196,120,90,0.55)';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                      e.currentTarget.style.boxShadow = '0 0 0 4px rgba(196,120,90,0.08)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
 
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-2 select-none" style={{ color: 'rgba(255, 255, 255, 0.45)' }}>
-                  Message
-                </label>
-                <textarea
-                  rows={4}
-                  required
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Share your thoughts..."
-                  className="w-full px-4 py-3 rounded-lg text-sm bg-[rgba(255,255,255,0.03)] border outline-none text-white transition-all focus:border-[var(--color-accent,#C4785A)] resize-none"
-                  style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full liquid-glass rounded-full py-3.5 mt-2 font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                style={{ letterSpacing: '0.03em', boxShadow: '0 4px 16px rgba(196, 120, 90, 0.15)' }}
-              >
-                Send Message
-              </button>
-            </form>
-          )}
+                <button
+                  type="submit"
+                  className="w-full py-4 rounded-2xl font-medium text-white transition-all duration-300 cursor-pointer mt-1 select-none"
+                  style={{
+                    background: 'linear-gradient(135deg, #C4785A, #B85C3A)',
+                    border: 'none',
+                    fontSize: '15px',
+                    letterSpacing: '0.02em',
+                    boxShadow: '0 4px 20px rgba(196,120,90,0.30), inset 0 1px 0 rgba(255,255,255,0.20)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 28px rgba(196,120,90,0.40), inset 0 1px 0 rgba(255,255,255,0.20)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(196,120,90,0.30), inset 0 1px 0 rgba(255,255,255,0.20)';
+                  }}
+                >
+                  Send Message
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </section>
 
-      {/* Cinematic Minimal Footer */}
-      <footer 
-        className="w-full text-center py-10 text-[11px] select-none tracking-widest uppercase border-t border-[rgba(255,255,255,0.06)]"
-        style={{ 
-          color: 'rgba(255, 255, 255, 0.35)',
-          background: '#0D141D',
-          fontFamily: "'Inter', sans-serif"
-        }}
+      {/* Footer */}
+      <footer
+        className="w-full py-10 border-t border-[rgba(255,255,255,0.06)] select-none"
+        style={{ background: '#080D14' }}
       >
-        <p>© 2026 Cowrite. Where words echo in the stillness.</p>
+        <div className="max-w-6xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4785A" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+            </svg>
+            <span className="text-[12px] font-medium" style={{ fontFamily: "'Instrument Serif', serif", color: 'rgba(255,255,255,0.45)' }}>
+              Cowrite
+            </span>
+          </div>
+          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.25)', fontFamily: "'Inter', sans-serif" }}>
+            © 2026 · Where words echo in the stillness.
+          </p>
+          <div className="flex items-center gap-6">
+            {['Privacy', 'Terms', 'GitHub'].map((l) => (
+              <a key={l} href="#" className="text-[11px] uppercase tracking-wider transition-colors" style={{ color: 'rgba(255,255,255,0.25)', fontFamily: "'Inter', sans-serif" }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#C4785A'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.25)'; }}>
+                {l}
+              </a>
+            ))}
+          </div>
+        </div>
       </footer>
     </div>
   );
