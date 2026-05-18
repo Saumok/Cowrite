@@ -27,7 +27,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL || '',
   'http://localhost:3000',
   'http://localhost:3001',
-].filter(Boolean);
+].filter(Boolean).map(url => url.replace(/\/$/, ''));
 
 // HTTP CORS
 app.use(cors({
